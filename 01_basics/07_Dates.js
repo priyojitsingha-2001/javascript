@@ -19,7 +19,6 @@ console.log(myDate.toLocaleString())
 //const params are in order 
 //(Year, Month(0-JAN), Day, Hour, Minutes, Seconds)
 let createdDate = new Date(2023, 0, 1)
-// let createdDate = new Date("1-01-2023")
 console.log(createdDate.toDateString())
 
 //Time
