@@ -1,5 +1,5 @@
 {
-    let a = 10; // this is a is not accessible outside the scope
+    let a = 10; // this variable is not accessible outside the scope
     const b = 20;
     var c = 30;
     console.log(`Inner: ${a}`);
