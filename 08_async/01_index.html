@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{  
+            font-size: 1.5rem;
+            margin-left: 37px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <p></p>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+</body>
+<script>
+    // setTimeout
+    // setTimeout(function () {
+    //     console.log('2 second');
+        
+    // },2000)
+
+    // setInterval and clearInterval
+    let counter = 0
+    let id
+    const startCounter = function () {
+        document.querySelector('p').innerHTML = counter++
+    }
+    document.querySelector('#start').addEventListener('click',function(e){
+        id = setInterval(startCounter, 1000)
+    })
+    document.querySelector('#stop').addEventListener('click',function(e){
+        clearInterval(id)
+    })
+</script>
+
+</html>
