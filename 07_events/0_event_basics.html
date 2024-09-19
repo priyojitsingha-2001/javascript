@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+    <script>
+        // It's possible to use onClick, but it's generally not recommended. 
+        // Event listeners (addEventListener) provide more flexibility, allowing you to attach multiple event handlers
+        // to the same element, easily remove them later, and separate your JavaScript logic from HTML for better readability and maintainability.
+        // owl.onClick = function () { alert('owl') }
+
+        // the eventListener takes in 3 parameters
+        // First the event
+        // second call back function for what needs to be done on the event trigger
+        // third event propagation
+
+        document.querySelector('#owl').addEventListener('click', function (e) {
+            // alert('owl clicked')
+            // console.log(e);    
+        }, false)
+
+        // some must learn event object properties - type, timeStamp, defaultPrevented(), target, toElement, sourceElement, currentTarget, clientX, clientY, screenX, screenY, altKey, ctrlkey, shiftkey, keycode 
+
+        // Event Propagation: This handles how events flow through the DOM (either capturing or bubbling phase).
+
+        // Event Capturing (true): In this example, events are captured from the parent (ul) down to the target element (owl).
+        document.querySelector('#images').addEventListener('click', function (e) {
+            console.log('clicked inside the ul'); // This logs first due to event capturing.
+        }, true); // 'true' enables capturing phase.
+
+        // Event Capturing (true): The event is captured from parent to child, and 'owl clicked' will log after the parent ul event.
+        document.querySelector('#owl').addEventListener('click', function (e) {
+            console.log('owl clicked'); // This logs after the ul's click event.
+        }, true);
+
+        // In both cases, because event capturing is enabled, the parent element (ul) captures the event first before the target (owl).
+
+        // Event Propagation: This handles how events flow through the DOM (either capturing or bubbling phase).
+
+        // Event Bubbling (false): In this example, events bubble from the target element (owl) up to the parent element (ul).
+        document.querySelector('#images').addEventListener('click', function (e) {
+            console.log('clicked inside the ul'); // This logs after the owl's click event, as it's part of bubbling.
+        }, false); // 'false' (or omitted) enables the bubbling phase.
+
+        // Event Bubbling (false): The event bubbles up from the owl to the ul.
+        document.querySelector('#owl').addEventListener('click', function (e) {
+            console.log('owl clicked'); // This logs first because the event starts at the target element.
+        }, false);
+
+        // In this case, the target element (owl) handles the event first, and then it bubbles up to the parent element (ul).
+
+        // practice example
+        const images = document.querySelector('#images')
+
+        images.addEventListener('click', function (e) {
+            // console.log(e.target.parentNode); // selects the parent element
+            // console.log(e.target.tagName); // this give you the name of the html element
+            if (e.target.tagName === 'IMG') {
+                const li = e.target.parentNode
+                li.remove()
+            }
+            // we can target the ul and then use removeChild() which will remove the li
+            // li.parentNode.removeChild(li) // you need to pass the child element
+        })
+
+    </script>
+</body>
+
+</html>
